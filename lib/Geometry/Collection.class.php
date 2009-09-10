@@ -37,7 +37,7 @@ class Collection extends geometry
    * @return unknown_type
    */
   
-  public function __construct($components, $class=null)
+  public function __construct($components = array(), $class=null)
   {
     if(!empty($components))
     {
@@ -82,4 +82,40 @@ class Collection extends geometry
       return $added = true;
     } 
   }
+  
+ /**
+  * APIMethod: removeComponents
+  * Remove components from this geometry.
+  *
+  * Parameters:
+  * components - {Array(<OpenLayers.Geometry>)} The components to be removed
+  */
+  
+  public function removeComponents($components) 
+  {
+     if(!is_array($components)) $components = array($components);
+     
+     foreach($components as $component):
+        self::removeComponent($component);
+     endforeach;
+     
+  }
+  
+ /**
+  * Method: removeComponent
+  * Remove a component from this geometry.
+  *
+  * Parameters:
+  * component - {<OpenLayers.Geometry>}
+  */
+  
+  public function removeComponent($component) 
+  {  
+     Util::removeItem($this->components, $component);
+     // clearBounds() so that it gets recalculated on the next call
+     // to this.getBounds();
+     //this.clearBounds();
+  }
+  
+  //TODO add getLength method
 }

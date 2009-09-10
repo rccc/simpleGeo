@@ -49,6 +49,7 @@
         }
         f.read(test_nl);
     }
+    
     function test_Format_KML_readCdataAttributes_21(t) {
         t.plan(2);
         var cdata = '<kml xmlns="http://earth.google.com/kml/2.1"><Document><Placemark><name><![CDATA[Pezinok]]></name><description><![CDATA[Full of text.]]></description><styleUrl>#rel1.0</styleUrl><Point> <coordinates>17.266666, 48.283333</coordinates></Point></Placemark></Document></kml>';

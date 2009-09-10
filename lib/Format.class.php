@@ -18,13 +18,6 @@
 class Format
 {
   /**
-   * A reference to options passed to the constructor.
-   * @var array
-   */
-  
-  public $options = array();
-  
-  /**
    * When passed a externalProjection and
    * internalProjection, the format will reproject the geometries it reads or writes. 
    * @var object - Projection instance
@@ -54,6 +47,11 @@ class Format
   
   public $keepData = false;
   
+  
+  public function __set($name, $value) {
+      $this->$name = $value;
+  }
+  
   /**
    * 
    * @param $options array
@@ -63,6 +61,12 @@ class Format
   public function __construct($options = array())
   {
      if(!empty($options))
-        $this->options = Util::extend($this->options, $options);
+     {
+        foreach($options as $property => $value):
+            $this->__set($property, $value);
+        endforeach;
+     }
+     
+      //  $this->options = Util::extend($this->options, $options);
   }
 }

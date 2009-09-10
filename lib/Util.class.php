@@ -6,7 +6,7 @@
 * full text of the license. 
 */
 
-require_once('./lib/FirePHP/FirePHP.class.php');
+//require_once('./lib/FirePHP/FirePHP.class.php');
 ob_start();
 
 /**
@@ -86,11 +86,93 @@ class Util
    */
   
   public static function extend($destination, $source)
-  {           
-      $source = is_array($source)? $source : array();
+  {   
+
+      if(empty($destination)) return $source;
+       
+      $destination = is_array($destination)? $destination : array($destination);       
+      $source = is_array($source)? $source : array($source);
       
       $destination = array_merge($destination, $source); // $destination keys are overwrited      
       
       return $destination;
   }
+  
+  /**
+   * Function: removeItem
+   * Remove an object from an array. Iterates through the array
+   * to find the item, then removes it.
+   *
+   * Parameters:
+   * @param $components array
+   * @param $item       object
+   * @return array
+   */
+  
+   public static function removeItem($components = array(), $item) 
+   {
+       foreach($components as $component):
+            static $i = 0;
+            if($component == $item) array_splice($components,$i,1);                             
+            $i++;
+       endforeach;
+       
+       return $components;
+   }
+   
+  /**
+   * Function: removeTail
+   * Takes a url and removes everything after the ? and #
+   *
+   * Parameters:
+   * url - {String} The url to process
+   *
+   * Returns:
+   * {String} The string with all queryString and Hash removed
+   */
+  public static function removeTail($url) 
+  {
+//      $head = null;
+//      
+//      $qMark = stristr($url, '?', true); //url.indexOf("?");
+//      $hashMark = stristr($url, '#', true);//url.indexOf("#");
+//
+//      Util::log($qMark, 'qMArk');
+//      Util::log($hashMark, 'hashMark');
+//      
+//      if ($qMark == false) {
+//          $head = ($hashMark != false) ? $hashMark : $url;
+//      } else {
+//          $head = ($hashMark != false) ? $hashMark: $qMark;
+//      }
+//      
+//      Util::log($head, 'head');
+//      
+//      return $head;
+        return $url;
+  }
+
+  
+  /**
+   * Function: concat
+   * merge two array
+   * 
+   * @param   array | string
+   * @return  array
+   */
+  
+  public static function concat() 
+  {
+  $vars=func_get_args();
+  $array=array();
+  foreach ($vars as $var) {
+     if (is_array($var)) {
+        foreach ($var as $val) {$array[]=$val;}
+     } else {
+        $array[]=$var;
+     }
+  }
+  return $array;
+  }
+  
 }

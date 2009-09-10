@@ -31,8 +31,10 @@ class geometry
    */
   
   public $parent = null;
-   
-  public function __construct($class)
+
+  //TODO implements bounds
+  
+  public function __construct($class = "geometry")
   {  
      $this->id = Util::createUniqueID($class);
   }

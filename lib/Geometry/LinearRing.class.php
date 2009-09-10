@@ -18,7 +18,7 @@
 
 class LinearRing extends LineString
 {
-  public function __construct($components)
+  public function __construct($components=array())
   {
     $this->componentTypes = "point";
     parent::__construct($components); 
